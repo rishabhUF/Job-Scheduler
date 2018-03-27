@@ -1,0 +1,47 @@
+DESIGN AND IMPLEMENTATION:
+------->>> Job Scheduler <<<-------
+1) I have made 3 classes for this solve this problem. Task is the class which consist of id, name, jobType, dependent List, expected end Time
+   and Processor class depicts each processor which consist of name, taskAcquired. And the main program consist of the excution of the program.
+
+2) Here I am considering that each time processor can do one job only. So first I am making the graph(directed graph) so that I can know the
+   way of implementing tasks according to its dependent tasks. Once I have made the task I make the list of the task according to the priority
+   in which they should be implememted. Like all the task who have no dependent task should be implemnted and so on.
+
+3) Then I add all the task in the readyToGo priority queue. In this queue I have take the priority as End or DeadLine time. According to
+   my algorithm all the task should done according to the deadline time order. One who has deadline before should be executed first.
+
+4) Then after that I assign the task to the number of processor from the readyToGo queue.
+
+
+
+Deployment Plan
+1) I have added logs in the program so that I can monitor the running of the code.
+   I have made a file named test.log in which logs are added. If log are very huge than we can take 2 different approaches
+   to maintain the logs. The first one would be to keep all the log for every day. This will help me maintaining log file
+   for everyday. Second approach would to push the log file to any cloud service and delete the file from the machine.
+   This approach will help to decrease the space taken in the machine if the file is very very huge.
+
+2) I have maintained log level as INFO, SEVERE and WARNING. When ever I will get the severe log, I will generate the Alert
+   to be send to the developing team because the code was not able to run properly and it was stopped. I will cause
+   end user a problem. I will maintain the monitoring of INFO log because that keeps me updated about whether or not
+   my program is returning me expected value or not.
+
+3) As I am making trie for the complete JSON file. So I will keep monitoring the time taken and space taken in the machine
+   because one I have taken 75% of the space(assumption), I will generate a Alert request which informs the team about
+   space reaching it max value and in near future it can through error. At the same time while I am adding the value to
+   the trie, which will take O(n) time where n is the length of word. So I just need to keep chart of trie size vs length of
+   word. Another chart I will maintain search time in trie with the trie size. This will help me to understand the efficiency
+   that I could add in the future. Like If my words ( search are more towards a - m I have to optimize my search on that end)
+
+4) One more graph that I will make is space taken by the trie and top 10 results at the every node. This should be monitored
+   because this will add a lot of space complexity with larger tree. And If I image once the system has reached its
+   good amount of searches than I can reduce the top number of results because system will provide me better results. Its
+   like training the system.
+
+
+Test Plan
+1) Basically I will test the program with smaller number of input. When I will get the results of the program then again
+   I will deploy the program in the test application and use real world test input and monitor the results. If I have good
+   results and log files looks clean. I will deploy the application on current branch of one specific region. After successful
+   deployment of the file from one region I can scale the application to different region. While monitoring the time and space
+   I might have to add more server and microservices.
